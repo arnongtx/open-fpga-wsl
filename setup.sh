@@ -73,11 +73,37 @@ begin
     process(clk)
     begin
         if rising_edge(clk) then
-            counter  clk,
+            counter <= counter + 1;
+        end if;
+    end process;
+
+    led <= counter(23);
+end architecture;"
+
+VHDL_TB="library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity blinky_tb is
+end entity;
+
+architecture sim of blinky_tb is
+    signal clk : std_logic := '0';
+    signal led : std_logic;
+
+    procedure print_cpp_msg(val : integer) is
+        attribute foreign of print_cpp_msg : procedure is \"VHPIDirect print_cpp_msg\";
+    begin
+        report \"VHPIDirect link failed - foreign attribute omitted\" severity failure;
+    end procedure;
+
+begin
+    uut: entity work.blinky
+        port map (
+            clk => clk,
             led => led
         );
 
-    -- สั่งดึงฟังก์ชันพิมพ์ Log ฝั่ง C++ ขึ้นมาโชว์บน Terminal ทุกๆ 100 รอบคลื่น
     process(clk)
         variable cycle_count : integer := 0;
     begin
