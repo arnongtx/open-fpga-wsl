@@ -27,7 +27,7 @@ echo -e "\n${BLUE}[2/4] Installing Make, CMake, Node.js, G++, and GDB...${NC}"
 sudo apt install -y make cmake nodejs npm dfu-util gcc g++ gdb
 
 # 3. ติดตั้ง FPGA Toolchain หลักรวมถึงสถาปัตยกรรม iCE40 และ ECP5
-echo -e "\n${BLUE}[3/4] Installing FPGA tools (Yosys, GHDL, nextpnr, GTKWave, openfpgaloader)...${NC}"
+echo -e "\n${BLUE}[3/4] Installing FPGA tools (Yosys, GHDL, nextpnr, GTKWave, openFPGALoader)...${NC}"
 sudo apt install -y yosys ghdl gtkwave openfpgaloader nextpnr-ice40 nextpnr-ecp5
 
 # 4. ติดตั้ง netlistsvg ผ่าน npm
@@ -193,7 +193,7 @@ init:
 
 synth: init $(OUT_JSON)
 $(OUT_JSON): $(SRC)
-	yosys -m ghdl -p "ghdl $(SRC) -e $(PROJ); synth_ice40 -top $(PROJ) -json $@"
+	yosys -m ghdl -p "ghdl --std=08 $(SRC) -e $(PROJ); synth_ice40 -top $(PROJ) -json $@"
 
 pnr: $(OUT_ASC)
 $(OUT_ASC): $(OUT_JSON) $(PCF)
@@ -209,8 +209,8 @@ $(OUT_SVG): $(OUT_JSON)
 
 sim: init
 	cd $(BUILD_DIR) && g++ -g -c ../$(CPP_SRC)
-	cd $(BUILD_DIR) && ghdl -a -g ../$(SRC) ../$(TB)
-	cd $(BUILD_DIR) && ghdl -e -g -Wl,sim_core.o -Wl,-lstdc++ $(PROJ)_tb
+	cd $(BUILD_DIR) && ghdl -a --std=08 -g ../$(SRC) ../$(TB)
+	cd $(BUILD_DIR) && ghdl -e --std=08 -g -Wl,sim_core.o -Wl,-lstdc++ $(PROJ)_tb
 	-cd $(BUILD_DIR) && ./$(PROJ)_tb --vcd=waveform.vcd --stop-time=$(SIM_TIME)
 
 debug: sim
@@ -278,7 +278,7 @@ init:
 
 synth: init $(OUT_JSON)
 $(OUT_JSON): $(SRC)
-	yosys -m ghdl -p "ghdl $(SRC) -e $(PROJ); synth_ecp5 -top $(PROJ) -json $@"
+	yosys -m ghdl -p "ghdl --std=08 $(SRC) -e $(PROJ); synth_ecp5 -top $(PROJ) -json $@"
 
 pnr: $(OUT_CONFIG)
 $(OUT_CONFIG): $(OUT_JSON) $(LPF)
@@ -294,8 +294,8 @@ $(OUT_SVG): $(OUT_JSON)
 
 sim: init
 	cd $(BUILD_DIR) && g++ -g -c ../$(CPP_SRC)
-	cd $(BUILD_DIR) && ghdl -a -g ../$(SRC) ../$(TB)
-	cd $(BUILD_DIR) && ghdl -e -g -Wl,sim_core.o -Wl,-lstdc++ $(PROJ)_tb
+	cd $(BUILD_DIR) && ghdl -a --std=08 -g ../$(SRC) ../$(TB)
+	cd $(BUILD_DIR) && ghdl -e --std=08 -g -Wl,sim_core.o -Wl,-lstdc++ $(PROJ)_tb
 	-cd $(BUILD_DIR) && ./$(PROJ)_tb --vcd=waveform.vcd --stop-time=$(SIM_TIME)
 
 debug: sim
