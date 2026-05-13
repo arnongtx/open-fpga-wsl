@@ -26,7 +26,7 @@ echo -e "\n${BLUE}[2/4] Installing Make, CMake, Node.js, G++, and GDB...${NC}"
 sudo apt install -y make cmake nodejs npm dfu-util gcc g++ gdb
 
 # 3. ติดตั้ง FPGA Toolchain หลักรวมถึงสถาปัตยกรรม iCE40 และ ECP5
-echo -e "\n${BLUE}[3/4] Installing FPGA tools (Yosys, GHDL, nextpnr, GTKWave, openFpgaLoader)...${NC}"
+echo -e "\n${BLUE}[3/4] Installing FPGA tools (Yosys, GHDL, nextpnr, GTKWave, openfpgaloader)...${NC}"
 sudo apt install -y yosys ghdl gtkwave openfpgaloader nextpnr-ice40 nextpnr-ecp5
 
 # 4. ติดตั้ง netlistsvg ผ่าน npm
@@ -167,7 +167,7 @@ wave: sim
 	gtkwave $(OUT_VCD)
 
 prog: $(OUT_BIN)
-	openFpgaLoader -b icebreaker $<
+	openFPGALoader -b icebreaker $<
 
 clean:
 	rm -rf $(BUILD_DIR)
@@ -244,7 +244,7 @@ wave: sim
 	gtkwave $(OUT_VCD)
 
 prog: $(OUT_BIT)
-	openFpgaLoader -b genericContainerFlashing $<
+	openFPGALoader -b genericContainerFlashing $<
 
 clean:
 	rm -rf $(BUILD_DIR)
@@ -353,7 +353,7 @@ echo -e "\n${GREEN}====================================================${NC}"
 echo -e "${GREEN}             Verifying Tool Versions                ${NC}"
 echo -e "${GREEN}====================================================${NC}"
 
-tools=("yosys" "ghdl" "nextpnr-ice40" "nextpnr-ecp5" "gtkwave" "openFpgaLoader" "make" "gcc" "g++" "gdb")
+tools=("yosys" "ghdl" "nextpnr-ice40" "nextpnr-ecp5" "gtkwave" "openFPGALoader" "make" "gcc" "g++" "gdb")
 
 for tool in "${tools[@]}"; do
     if command -v $tool &> /dev/null; then
