@@ -23,7 +23,7 @@ sudo apt update && sudo apt upgrade -y
 
 # 2. ติดตั้ง Build Tools, Node.js, เครื่องมือแฟลชบอร์ด และ Debugger (GCC, G++, GDB)
 echo -e "\n${BLUE}[2/4] Installing Make, CMake, Node.js, G++, and GDB...${NC}"
-sudo apt install -y make cmake nodejs npm dfu-util fpga-utils gcc g++ gdb
+sudo apt install -y make cmake nodejs npm dfu-util gcc g++ gdb
 
 # 3. ติดตั้ง FPGA Toolchain หลักรวมถึงสถาปัตยกรรม iCE40 และ ECP5
 echo -e "\n${BLUE}[3/4] Installing FPGA tools (Yosys, GHDL, nextpnr, GTKWave, openFpgaLoader)...${NC}"
