@@ -3,7 +3,8 @@
 #  Project: open-fpga-wsl (setup.sh)
 #  Description: Automated Open Source FPGA Toolchain Installer for WSL (Ubuntu)
 #  Author: arnongtx
-#  License: MIT License (github.com)
+#  Copyright: (c) 2026 arnongtx
+#  License: MIT (SPDX-License-Identifier: MIT)
 # ==============================================================================
 
 GREEN='\033[0;32m'
