@@ -97,7 +97,7 @@ architecture sim of blinky_tb is
 
 begin
     clk <= not clk after 10 ns;
-    
+
     uut: entity work.blinky
         port map (
             clk => clk,
@@ -184,7 +184,7 @@ sim: init
 	cd $(BUILD_DIR) && g++ -g -c ../$(CPP_SRC)
 	cd $(BUILD_DIR) && ghdl -a -g ../$(SRC) ../$(TB)
 	cd $(BUILD_DIR) && ghdl -e -g -Wl,sim_core.o -Wl,-lstdc++ $(PROJ)_tb
-	cd $(BUILD_DIR) && ./$(PROJ)_tb --vcd=waveform.vcd --stop-time=$(SIM_TIME)
+	-cd $(BUILD_DIR) && ./$(PROJ)_tb --vcd=waveform.vcd --stop-time=$(SIM_TIME)
 
 debug: sim
 	cd $(BUILD_DIR) && gdb ./$(PROJ)_tb
@@ -261,7 +261,7 @@ sim: init
 	cd $(BUILD_DIR) && g++ -g -c ../$(CPP_SRC)
 	cd $(BUILD_DIR) && ghdl -a -g ../$(SRC) ../$(TB)
 	cd $(BUILD_DIR) && ghdl -e -g -Wl,sim_core.o -Wl,-lstdc++ $(PROJ)_tb
-	cd $(BUILD_DIR) && ./$(PROJ)_tb --vcd=waveform.vcd --stop-time=$(SIM_TIME)
+	-cd $(BUILD_DIR) && ./$(PROJ)_tb --vcd=waveform.vcd --stop-time=$(SIM_TIME)
 
 debug: sim
 	cd $(BUILD_DIR) && gdb ./$(PROJ)_tb
