@@ -91,13 +91,13 @@ architecture sim of blinky_tb is
     signal clk : std_logic := '0';
     signal led : std_logic;
 
-    procedure print_cpp_msg(val : integer) is
-        attribute foreign of print_cpp_msg : procedure is \"VHPIDirect print_cpp_msg\";
-    begin
-        report \"VHPIDirect link failed - foreign attribute omitted\" severity failure;
-    end procedure;
+    procedure print_cpp_msg(val : integer);
+    attribute foreign of print_cpp_msg : procedure is \"VHPIDIRECT print_cpp_msg\";
+    procedure print_cpp_msg(val : integer) is begin end procedure;
 
 begin
+    clk <= not clk after 10 ns;
+    
     uut: entity work.blinky
         port map (
             clk => clk,
