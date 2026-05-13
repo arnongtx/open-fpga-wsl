@@ -13,7 +13,7 @@
 *   **GHDL:** ตัวจำลองสถานะและคอมไพล์ภาษา VHDL (VHDL Simulation)
 *   **nextpnr-ice40 / nextpnr-ecp5:** เครื่องมือจัดวางอุปกรณ์และหาเส้นทางพิน (Place & Route)
 *   **GTKWave:** โปรแกรมแสดงกราฟคลื่นสัญญาณวงจรดิจิทัล (Waveform Viewer)
-*   **openFpgaLoader / dfu-util:** เครื่องมือดาวน์โหลดและแฟลชไฟล์บิตสตรีมลงบอร์ด FPGA ผ่านพอร์ต USB
+*   **openFPGALoader / dfu-util:** เครื่องมือดาวน์โหลดและแฟลชไฟล์บิตสตรีมลงบอร์ด FPGA ผ่านพอร์ต USB
 *   **netlistsvg:** เครื่องมือสร้างภาพผังวงจรดิจิทัล (Schematic Generator) จากไฟล์รูปแบบ JSON
 *   **Make / CMake / GCC / G++:** ระบบควบคุมการบิวด์และชุดคอมไพเลอร์พัฒนาข้ามภาษาภาษา C/C++
 *   **GDB:** ตัวตรวจสอบระบบและไล่บั๊กส่องค่าสัญญาณภายในคอมพิวเตอร์โฮสต์ (GNU Debugger)
@@ -83,7 +83,7 @@ make sim
 
 ## ⚙️ ขั้นตอนการติดตั้งและเตรียมระบบ USBIPD บน Windows (Prerequisites)
 
-เนื่องจากสคริปต์ `openFpgaLoader` รันอยู่บนฝั่ง Linux (WSL) แต่ตัวบอร์ด FPGA เสียบเข้ากับฝั่ง Windows คุณจึงจำเป็นต้องเตรียมระบบฝั่ง Windows ล่วงหน้าด้วยขั้นตอนดังนี้:
+เนื่องจากสคริปต์ `openFPGALoader` รันอยู่บนฝั่ง Linux (WSL) แต่ตัวบอร์ด FPGA เสียบเข้ากับฝั่ง Windows คุณจึงจำเป็นต้องเตรียมระบบฝั่ง Windows ล่วงหน้าด้วยขั้นตอนดังนี้:
 
 ### 1. อัปเดตระบบ WSL ให้พร้อมรองรับ USB Pass-through
 เปิด PowerShell (สิทธิ์ทั่วไป) บน Windows แล้วสั่งอัปเดตเคอร์เนลให้เรียบร้อย:
@@ -135,7 +135,7 @@ BUSID  VID:PID    DEVICE                                                        
    ```powershell
    usbipd attach --wsl --busid <BUSID>
    ```
-4. ย้อนกลับมาที่ WSL Terminal ของคุณ จากนั้นพิมพ์คำสั่งเพื่อแฟลชไฟล์ลงบอร์ดจริงผ่านเครื่องมือ `openFpgaLoader`:
+4. ย้อนกลับมาที่ WSL Terminal ของคุณ จากนั้นพิมพ์คำสั่งเพื่อแฟลชไฟล์ลงบอร์ดจริงผ่านเครื่องมือ `openFPGALoader`:
    ```bash
    make prog
    ```
